@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ray's Computer</title>
+		<style>
+			body {
+				background-image: url('./img/everest.jpg');
+				background-size: 100vw 100vh;
+			}
+			div#my_ride {
+				content: url('./img/motorcycle.png');
+				width: 250px;
+				height: 150px;
+				top: 50%;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="my_ride"></div>
+		<script>
+			let offset = [0, 0];
+			let mouseDown = false;
+
+			let bike = document.getElementById('my_ride');
+
+			bike.addEventListener('mousedown', function (event) {
+				mouseDown = true;
+				offset = [bike.offsetLeft - event.clientX, bike.offsetTop - event.clientY];
+			}, true);
+
+			document.addEventListener('mouseup', () => {mouseDown = false;}, true);
+
+			document.addEventListener('mousemove', function (event) {
+				event.preventDefault();
+
+				if (mouseDown) {
+					bike.style.left = (event.clientX + offset[0]) + 'px';
+					bike.style.top = (event.clientY + offset[1]) + 'px';
+				}
+			}, true);
+		</script>
+	</body>
+</html>
